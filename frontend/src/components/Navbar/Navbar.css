@@ -1,0 +1,38 @@
+.Navbar {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border-bottom: 2px solid #ffffff;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+.btn {
+    background-color: #ffffff;
+    color: #000;
+}
+
+.btn:hover {
+    background-color: #f3f3f3;
+    transition: 0.2s;
+}
+
+.NavButton {
+    cursor: pointer;
+    padding: 15px 0;
+    background-color: #ffffff;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+}
+
+.CreateAccount {
+    background-color: #ef9e12;
+    transition: 0.2s;
+}
+.CreateAccount:hover {
+    background-color: #000;
+    color: #ffffff;
+}

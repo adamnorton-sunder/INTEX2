@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import Privacy from './components/Privacy/Privacy';
+import Summary from './components/Summary/Summary';
+import Supervised from './components/Supervised/Supervised';
+import Unsupervised from './components/Unsupervised/Unsupervised';
+import Login from './components/Login/Login';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar/>
+      <div className="App">
+        {/* Navigation and other components can go here */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/summary" element={<Summary />} />
+          <Route path="/supervised" element={<Supervised />} />
+          <Route path="/unsupervised" element={<Unsupervised />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
