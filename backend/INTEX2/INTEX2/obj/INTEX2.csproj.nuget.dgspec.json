@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adamnorton\\Documents\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {}
+    "C:\\Users\\annad\\Documents\\Intex\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adamnorton\\Documents\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {
+    "C:\\Users\\annad\\Documents\\Intex\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adamnorton\\Documents\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj",
+        "projectUniqueName": "C:\\Users\\annad\\Documents\\Intex\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj",
         "projectName": "INTEX2",
-        "projectPath": "C:\\Users\\adamnorton\\Documents\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj",
-        "packagesPath": "C:\\Users\\adamnorton\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adamnorton\\Documents\\INTEX2\\backend\\INTEX2\\INTEX2\\obj\\",
+        "projectPath": "C:\\Users\\annad\\Documents\\Intex\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj",
+        "packagesPath": "C:\\Users\\annad\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\annad\\Documents\\Intex\\INTEX2\\backend\\INTEX2\\INTEX2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\adamnorton\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\annad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
