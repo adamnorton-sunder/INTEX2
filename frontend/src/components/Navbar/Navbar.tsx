@@ -1,7 +1,10 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../Login/UserContext";
 
 function Navbar() {
+  const { user } = useUserContext();
+
   return (
     <section className="Navbar">
       <Link to="/">
@@ -24,7 +27,7 @@ function Navbar() {
       </Link>
       <Link to="/login">
         <div className="NavButton Login" style={{ color: "white" }}>
-          LOGIN
+          { user?.isAuthenticated ? user?.name : "Login" }
         </div>
       </Link>
     </section>
