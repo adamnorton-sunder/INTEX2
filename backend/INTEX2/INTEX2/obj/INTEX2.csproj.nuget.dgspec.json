@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< Updated upstream
     "C:\\Users\\annad\\Documents\\Intex\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {}
   },
   "projects": {
@@ -15,6 +16,22 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\annad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+    "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {}
+  },
+  "projects": {
+    "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj",
+        "projectName": "INTEX2",
+        "projectPath": "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2\\INTEX2.csproj",
+        "packagesPath": "C:\\Users\\parkersmith\\.nuget\\packages\\",
+        "outputPath": "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\parkersmith\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Stashed changes
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
