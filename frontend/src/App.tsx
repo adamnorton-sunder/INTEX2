@@ -7,7 +7,7 @@ import Privacy from "./components/Privacy/Privacy";
 import Summary from "./components/Summary/Summary";
 import Supervised from "./components/Supervised/Supervised";
 import Unsupervised from "./components/Unsupervised/Unsupervised";
-import Login from "./components/Login/Login";
+import Login from "./components/Login/loginPage";
 
 function App() {
   return (
