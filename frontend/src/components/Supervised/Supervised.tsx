@@ -1,10 +1,14 @@
 import "../../components/Home/Home.css";
+import { useUserContext } from "../Login/UserContext";
 
 function Supervised() {
+  const { user } = useUserContext();
+
   return (
     <section className="page-container">
       <div style={{ paddingTop: "40px" }}>
         <h1>SUPERVISED LEARNING MODEL</h1>
+        <p>Is authenticated: {user?.isAuthenticated.toString()}</p>
       </div>
       <div
         style={{ display: "grid", placeItems: "center" }}

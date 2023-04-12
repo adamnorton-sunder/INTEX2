@@ -2,11 +2,18 @@ import { useContext } from "react";
 import { Auth } from 'aws-amplify';
 import { AuthContext } from "../../contexts/AuthContext";
 
+
+
 function AwsLogin() {
   const { login, setIsAuthenticated } = useContext(AuthContext);
 
+  function testOutput() {
+    console.log('Test Output!!');
+  }
+
   const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    console.log('NORTY: handling sign in');
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
@@ -37,12 +44,12 @@ function AwsLogin() {
       <form onSubmit={handleSignIn}>
         <label>
           Username:
-          <input type="text" name="username" />
+          <input type="text" name="username" style={{ color: 'black'}} />
         </label>
         <br />
         <label>
           Password:
-          <input type="password" name="password" />
+          <input type="password" name="password" style={{ color: 'black'}} />
         </label>
         <br />
         <button type="submit">Sign In</button>
