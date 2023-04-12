@@ -1,18 +1,54 @@
-import userEvent from '@testing-library/user-event';
+import { useContext } from "react";
 import { Auth } from 'aws-amplify';
+import { AuthContext } from "../../contexts/AuthContext";
 
-async function signIn(username: string, password: string) {
-  try {
-    const user = await Auth.signIn(username, password);
-  } catch (error) {
-    console.log('error signing in', error);
-  }
+function AwsLogin() {
+  const { login, setIsAuthenticated } = useContext(AuthContext);
+
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const username = formData.get("username") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      await login(username, password);
+
+      // Retrieve the user's authentication tokens
+      const session = await Auth.currentSession();
+      const idToken = session.getIdToken().getJwtToken();
+      const accessToken = session.getAccessToken().getJwtToken();
+      const refreshToken = session.getRefreshToken().getToken();
+
+      // Do something with the tokens
+      console.log("idToken:", idToken);
+      console.log("accessToken:", accessToken);
+      console.log("refreshToken:", refreshToken);
+
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.log("Error signing in:", error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Sign In</h2>
+      <form onSubmit={handleSignIn}>
+        <label>
+          Username:
+          <input type="text" name="username" />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" name="password" />
+        </label>
+        <br />
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
+  );
 }
 
-async function signOut() {
-  try {
-    await Auth.signOut();
-  } catch (error) {
-    console.log('error signing out: ', error);
-  }
-}
+export default AwsLogin;
