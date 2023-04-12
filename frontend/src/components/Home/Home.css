@@ -30,3 +30,11 @@ h1 {
 .content-wrap {
   padding-bottom: 2.5rem;
 }
+
+.article-link {
+  color: white;
+}
+
+.article-link:hover {
+  color: gray;
+}
