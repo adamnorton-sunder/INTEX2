@@ -1,6 +1,7 @@
 import "./Home.css";
 import CookieConsent from "react-cookie-consent";
 import Swiper from "../Swiper/Swiper";
+import { Carousel } from "../Carousel/Carousel";
 
 function Home() {
   const items = [
@@ -31,9 +32,12 @@ function Home() {
         style={{ display: "grid", placeItems: "center" }}
         className="content-wrap"
       >
-        <div className="container">
-          <Swiper items={items} />
+        <div>
+          <Carousel />
         </div>
+        {/* <div className="container">
+          <Swiper items={items} />
+        </div> */}
         <div style={{ maxWidth: "1100px" }}>
           <h2>Fag El-Gamous</h2>
           <p>
