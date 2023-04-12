@@ -1,10 +1,32 @@
 * {
-    color: #fff;
+  color: #fff;
 }
 
 h1 {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    color: #fff;
-    font-size: 48px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  color: #fff;
+  font-size: 48px;
+}
+
+.white-link {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.white-link:hover {
+  color: gray;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  padding-bottom: 2.5rem;
 }

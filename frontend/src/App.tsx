@@ -1,18 +1,18 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
-import Home from './components/Home/Home';
-import Privacy from './components/Privacy/Privacy';
-import Summary from './components/Summary/Summary';
-import Supervised from './components/Supervised/Supervised';
-import Unsupervised from './components/Unsupervised/Unsupervised';
-import Login from './components/Login/Login';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
+import Privacy from "./components/Privacy/Privacy";
+import Summary from "./components/Summary/Summary";
+import Supervised from "./components/Supervised/Supervised";
+import Unsupervised from "./components/Unsupervised/Unsupervised";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <div className="App">
         {/* Navigation and other components can go here */}
         <Routes>
@@ -23,6 +23,7 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <div className="container"></div>
       </div>
     </Router>
   );
