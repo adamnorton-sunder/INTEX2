@@ -12,6 +12,7 @@ a {
 .btn {
   background-color: #ffffff;
   color: #000;
+  letter-spacing: 3px;
 }
 
 .btn:hover {
@@ -31,6 +32,7 @@ a {
 .Login {
   background-color: #ef9e12;
   transition: 0.2s;
+  letter-spacing: 3px;
 }
 .Login:hover {
   background-color: #000;

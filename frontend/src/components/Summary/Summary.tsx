@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "../../components/Home/Home.css";
 import FilterButton from "./FilterButton";
+import DataTable from "./DataTable";
+import data from '../../mock-data.json';
 
 function Summary() {
 
@@ -13,6 +15,9 @@ function Summary() {
   const sexFilters = ['Male', 'Female']
   const hairColorFilters = ['Brown', 'Black', 'Other']
 
+  const columnsToInclude = ['id', 'headdirection', 'sex', 'depth', 'facebundles', 'preservation', 'haircolor', 'hair', 'length', 'ageatdeath', 'burialnumber', 'dateofexcavation'];
+  const itemsPerPage = 15;
+
   const handleFilterClick = (filterName: string) => {
     if (selectedFilters.includes(filterName)) {
       setSelectedFilters(selectedFilters.filter((filter) => filter !== filterName));
@@ -23,10 +28,10 @@ function Summary() {
 
   return (
     <section className="page-container">
-      <div style={{ display: 'grid', gridTemplateColumns: '25% 1fr', height: '2000px' }}>
-        <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '20px', paddingLeft: '35px', textAlign: 'left' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '25% 1fr' }}>
+        <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '20px', paddingLeft: '35px', textAlign: 'left', height: '100vh' }}>
           <div>
-            <h1>FILTERS</h1>
+            <h3 style={{ letterSpacing: '5px' }}>FILTERS</h3>
           </div>
 
           <div>
@@ -41,7 +46,7 @@ function Summary() {
           </div>
 
           <div>
-            <h3>Textile Color</h3>
+            <h3 style={{ letterSpacing: '5px' }}>TEXTILE COLOR</h3>
           </div>
 
           <div>
@@ -56,7 +61,7 @@ function Summary() {
           </div>
 
           <div>
-            <h3>Head Direction</h3>
+            <h3 style={{ letterSpacing: '5px' }}>HEAD DIRECTION</h3>
           </div>
 
           <div>
@@ -71,7 +76,7 @@ function Summary() {
           </div>
 
           <div>
-            <h3>Hair Color</h3>
+            <h3 style={{ letterSpacing: '5px' }}>HAIR COLOR</h3>
           </div>
 
           <div>
@@ -86,7 +91,7 @@ function Summary() {
           </div>
 
           <div>
-            <h3>Gender</h3>
+            <h3 style={{ letterSpacing: '5px' }}>GENDER</h3>
           </div>
 
           <div>
@@ -101,7 +106,7 @@ function Summary() {
           </div>
 
           <div>
-            <h3>Age at Death</h3>
+            <h3 style={{ letterSpacing: '5px' }}>AGE AT DEATH</h3>
           </div>
 
           <div>
@@ -116,7 +121,10 @@ function Summary() {
           </div>
         </div>
         <div>
-          <h1>BODY</h1>
+          <h1>BURIAL DATA</h1>
+          <div style={{ display: 'grid', placeItems: 'center' }}>
+            <DataTable data={data} columnsToInclude={columnsToInclude} itemsPerPage={itemsPerPage} />
+          </div>
         </div>
       </div>
       <footer style={{ display: "grid", placeItems: "center" }}>
