@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 
 var authConnectString = builder.Configuration["ConnectionStrings:DefaultConnection"];
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<postgresContext>(options =>
     options.UseNpgsql(authConnectString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
