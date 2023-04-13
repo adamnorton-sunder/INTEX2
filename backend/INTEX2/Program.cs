@@ -20,6 +20,7 @@ var authConnectString = builder.Configuration["ConnectionStrings:DefaultConnecti
 builder.Services.AddDbContext<postgresContext>(options =>
     options.UseNpgsql(authConnectString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -29,6 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(p => p.WithOrigins("http://localhost:3000"));
+app.UseCors(p => p.WithOrigins("https://www.byumummycollection.net"));
 
 app.UseHttpsRedirection();
 
