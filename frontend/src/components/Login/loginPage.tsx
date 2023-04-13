@@ -5,9 +5,6 @@ import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../../aws-exports';
 import { AuthContext } from '../../contexts/AuthContext';
 import './Login.css';
-import AwsLogin from './awsLogin';
-import { Authenticator } from '@aws-amplify/ui-react';
-import { AuthState } from '@aws-amplify/ui-components';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { useUserContext } from './UserContext';
 
