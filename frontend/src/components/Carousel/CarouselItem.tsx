@@ -1,4 +1,5 @@
 import React from "react";
+import '../../components/Home/Home.css';
 
 interface CarouselItemProps {
   item: {
@@ -16,7 +17,7 @@ export const CarouselItem: React.FC<CarouselItemProps> = ({
     <div className="carousel-item">
       <div></div>
       <img className="carousel-img" src={item.imageSrc} alt={item.imageAlt} />
-      <div className="carousel-item-text">{item.imageAlt}</div>
+      {/* <div className="carousel-item-text">{item.imageAlt}</div> */}
     </div>
   );
 };
