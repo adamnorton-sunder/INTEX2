@@ -1,0 +1,44 @@
+adultsubadult: "A"
+ageatdeath: "A"
+area: "SE"
+burialid: null
+burialmaterials: null
+burialnumber: "30"
+clusternumber: null
+colorid: null
+dataexpertinitials: "TW"
+dateofexcavation: null
+depth: "1.49"
+description: "Very loose weave\r\nDimensions are for the largest of multiple fragments."
+direction: null
+eastwest: "E"
+estimatedperiod: null
+excavationrecorder: null
+facebundles: null
+fieldbookexcavationyear: "1998"
+fieldbookpage: "37"
+goods: null
+hair: null
+haircolor: ""
+headdirection: "E"
+id: 19140298416326436
+length: "1.6"
+locale: "200/210 N 20/30 E\r\nSE 30\r\n1998"
+northsouth: "N"
+photographeddate: "2011-01-05T06:00:00"
+photos: null
+preservation: null
+sampledate: "9999-09-09T06:00:00"
+samplescollected: "true"
+sex: ""
+shaftnumber: null
+southtofeet: "4.15"
+southtohead: "3.78"
+squareeastwest: "20"
+squarenorthsouth: "200"
+text: "reversal, so head-east  sterile soil beneath  2 photographs-first showed #20 by mistake-changed to #30 titled a \"reversal\" on page 133"
+textileid: 312
+value: null
+westtofeet: "3.55"
+westtohead: "5"
+wrapping: "B"

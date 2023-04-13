@@ -39,6 +39,15 @@ interface DataTableProps {
     fieldbookexcavationyear: number;
     clusternumber: number;
     shaftnumber: number;
+
+    colorid?: number;
+    description?: string;
+    estimatedperiod?: string;
+    locale?: string;
+    photographeddate? : string;
+    sampledate? : string;
+    textileid? : number;
+    value? : number;
   }>;
   columnsToInclude: string[];
   itemsPerPage: number;

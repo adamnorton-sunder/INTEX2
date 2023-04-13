@@ -9,6 +9,7 @@ import Supervised from "./components/Supervised/Supervised";
 import Unsupervised from "./components/Unsupervised/Unsupervised";
 import Login from "./components/Login/loginPage";
 import AddBurial from "./components/AddBurial/AddBurial";
+import HttpConnectionTest from "./components/HttpConnectionTest/HttpConnectionTest";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/login" element={<Login />} />
           <Route path="/addBurial" element={<AddBurial />} />
+          <Route path="/testHttp" element={<HttpConnectionTest />} />
         </Routes>
       </div>
     </Router>
