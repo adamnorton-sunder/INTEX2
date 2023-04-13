@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import './AddBurial.css';
 import { BurialRecord } from "../../BurialRecord.interface";
+import { useState } from "react";
 
 function AddBurial() {
-
-    let recordToAdd: BurialRecord = {
+    const [recordToAdd, setRecordToAdd] = useState({
         id: 0,
         squarenorthsouth: "",
         headdirection: "",
@@ -40,7 +40,7 @@ function AddBurial() {
         fieldbookexcavationyear: 0,
         clusternumber: 0,
         shaftnumber: 0
-    };
+    });
 
     const fields = ['depth',
         'adultsubadult', 'southtohead',
@@ -70,10 +70,10 @@ function AddBurial() {
                         <h4 style={{ letterSpacing: '5px', margin: '0px' }}>GENDER</h4>
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className="optionButton" onClick={() => { recordToAdd.sex = 'male' }}>
+                        <button className={recordToAdd.sex === 'male' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, sex: 'male' })}>
                             <h3 style={{ margin: '0px', fontSize: '14px' }}>Male</h3>
                         </button>
-                        <button className="optionButton">
+                        <button className={recordToAdd.sex === 'female' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, sex: 'female' })}>
                             <h3 style={{ margin: '0px', fontSize: '14px' }}>Female</h3>
                         </button>
                     </div>

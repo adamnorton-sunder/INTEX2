@@ -12,3 +12,14 @@ input {
 .optionButton:hover {
     background-color: rgba(50,50,50, .40);
 }
+
+.selectedOptionButton {
+    padding: 8px 25px;
+    background-color: #ef9e12;
+    border-radius: 20px;
+    border: 1px solid #ef9e12;
+}
+
+.selectedOptionButton:hover {
+    background-color: #d68a07;
+}
