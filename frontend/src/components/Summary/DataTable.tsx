@@ -69,8 +69,8 @@ const DataTable: React.FC<DataTableProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {displayedData.map((item) => (
-            <tr key={item.id} style={{ border: '1px solid #4c4c4c' }}>
+          {displayedData.map((item, rowIndex) => (
+            <tr key={item.id} style={{ border: '1px solid #4c4c4c', backgroundColor: rowIndex % 2 === 0 ? 'rgb(20,20,20)' : 'rgb(40,40,40)' }}>
               {columnsToInclude.map((key, index) => (
                 <td key={`${item.id}-${index}`} style={{ border: '1px solid #4c4c4c', padding: '8px 0px' }}>{(item as any)[key]}</td>
               ))}
