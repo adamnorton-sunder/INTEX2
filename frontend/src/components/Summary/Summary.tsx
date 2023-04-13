@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../components/Home/Home.css";
 import FilterButton from "./FilterButton";
 import DataTable from "./DataTable";
@@ -6,8 +6,22 @@ import data from '../../mock-data.json';
 import styles from './Summary.module.css';
 import { Link } from "react-router-dom";
 import { useUserContext } from "../Login/UserContext";
+import { BurialTextileRecord } from "../../BurialTextileRecord.interface";
 
 function Summary() {
+
+  const [burialData, setBurialData] = useState<BurialTextileRecord[]>([]);
+
+  const fetchRecords = async () => {
+    const res = await fetch('https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt')
+    const temp = await res.json();
+    console.log('Fetched data:', temp);
+    setBurialData(temp);
+  }
+
+  useEffect(() => {
+    fetchRecords();
+  }, []);
 
   const { user } = useUserContext();
 
@@ -35,7 +49,7 @@ function Summary() {
     <section className="page-container">
       <div style={{ display: 'grid', gridTemplateColumns: '25% 1fr' }}>
         <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '50px 20px 35px 20px', textAlign: 'left', height: '100vh' }}>
-          <div style={{ marginBottom: '20px'}}>
+          <div style={{ marginBottom: '20px' }}>
             <h3 style={{ letterSpacing: '5px', margin: '0px' }}>FILTERS</h3>
           </div>
 
@@ -137,7 +151,7 @@ function Summary() {
           </div>
 
           <div style={{ display: 'grid', placeItems: 'center' }}>
-            <DataTable data={data} columnsToInclude={columnsToInclude} itemsPerPage={itemsPerPage} />
+            <DataTable data={burialData} columnsToInclude={columnsToInclude} itemsPerPage={itemsPerPage} />
           </div>
         </div>
       </div>

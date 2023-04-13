@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './DataTable.module.css';
+import { useNavigate } from 'react-router-dom';
 
 interface DataTableProps {
   data: Array<{
@@ -38,6 +39,15 @@ interface DataTableProps {
     fieldbookexcavationyear: number;
     clusternumber: number;
     shaftnumber: number;
+
+    colorid?: number;
+    description?: string;
+    estimatedperiod?: string;
+    locale?: string;
+    photographeddate? : string;
+    sampledate? : string;
+    textileid? : number;
+    value? : number;
   }>;
   columnsToInclude: string[];
   itemsPerPage: number;
@@ -58,6 +68,12 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   const endIndex = startIndex + itemsPerPage;
   const displayedData = data.slice(startIndex, endIndex);
 
+  const navigate = useNavigate();
+
+  const handleEditRecord = (recordToAdd: any) => {
+    navigate('/addBurial', { state: { recordToAdd } })
+  }
+
   return (
     <section>
       <table style={{ border: '1px solid #4c4c4c', borderRadius: '20px', padding: '20px', borderCollapse: 'collapse', backgroundColor: 'rgb(20,20,20)' }}>
@@ -70,11 +86,17 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         </thead>
         <tbody>
           {displayedData.map((item, rowIndex) => (
-            <tr key={item.id} style={{ border: '1px solid #4c4c4c', backgroundColor: rowIndex % 2 === 0 ? 'rgb(20,20,20)' : 'rgb(40,40,40)' }}>
-              {columnsToInclude.map((key, index) => (
-                <td key={`${item.id}-${index}`} style={{ border: '1px solid #4c4c4c', padding: '8px 0px' }}>{(item as any)[key]}</td>
-              ))}
-            </tr>
+            <tr
+            onClick={() => handleEditRecord(item)}
+            key={item.id}
+            className={styles.dataTableRow}
+          >
+            {columnsToInclude.map((key, index) => (
+              <td key={`${item.id}-${index}`} className={styles.dataTableCell}>
+                {(item as any)[key]}
+              </td>
+            ))}
+          </tr>
           ))}
         </tbody>
       </table>
@@ -84,7 +106,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
             key={`page-${page}`}
             onClick={() => handlePageChange(page)}
             style={{ margin: '0px 10px', padding: '10px', borderRadius: '20px', backgroundColor: page === currentPage ? '#ef9e12' : 'transparent', minWidth: '40px', minHeight: '40px', border: '1px solid rgb(50,50,50)' }}
-            >
+          >
             {page}
           </button>
         ))}

@@ -12,3 +12,37 @@ input {
 .optionButton:hover {
     background-color: rgba(50,50,50, .40);
 }
+
+.selectedOptionButton {
+    padding: 8px 25px;
+    background-color: #ef9e12;
+    border-radius: 20px;
+    border: 1px solid #ef9e12;
+}
+
+.selectedOptionButton:hover {
+    background-color: #d68a07;
+}
+
+.saveButton {
+    padding: 8px 25px;
+    background-color: transparent;
+    border-radius: 20px;
+    border: 1px solid rgb(50,50,50);
+}
+
+.saveButton:hover {
+    background-color: #232323;
+}
+
+.delButton {
+    padding: 8px 25px;
+    background-color: transparent;
+    border-radius: 20px;
+    border: 1px solid rgb(50,50,50);
+    color: #d13535 !important;
+}
+
+.delButton:hover {
+    background-color: #d13535;
+}
