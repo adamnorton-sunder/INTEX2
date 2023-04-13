@@ -15,16 +15,10 @@ namespace INTEX2.Controllers
             _context = temp;
         }
 
-        public IEnumerable<object> Get()
+        public IEnumerable<Textile> Get()
         {
-            var textiles = _context.Textiles
+            return _context.Textiles
                 .ToArray();
-
-            var result = new List<object>();
-
-            result.AddRange(textiles);
-
-            return result;
         }
     }
 }
