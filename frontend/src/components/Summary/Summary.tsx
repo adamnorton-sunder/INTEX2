@@ -3,8 +3,13 @@ import "../../components/Home/Home.css";
 import FilterButton from "./FilterButton";
 import DataTable from "./DataTable";
 import data from '../../mock-data.json';
+import styles from './Summary.module.css';
+import { Link } from "react-router-dom";
+import { useUserContext } from "../Login/UserContext";
 
 function Summary() {
+
+  const { user } = useUserContext();
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
@@ -121,7 +126,16 @@ function Summary() {
           </div>
         </div>
         <div>
-          <h1>BURIAL DATA</h1>
+          <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', padding: '20px 100px' }}>
+            <h3 style={{ letterSpacing: '5px', margin: '0px' }}>BURIAL DATA</h3>
+            <div></div>
+            <Link to={user?.isAuthenticated ? "/addBurial" : "/login"}>
+              <button className={styles.addButton}>
+                <h3 style={{ letterSpacing: '5px', margin: '0px', fontSize: '14px' }}>ADD RECORD</h3>
+              </button>
+            </Link>
+          </div>
+
           <div style={{ display: 'grid', placeItems: 'center' }}>
             <DataTable data={data} columnsToInclude={columnsToInclude} itemsPerPage={itemsPerPage} />
           </div>

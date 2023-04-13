@@ -8,6 +8,7 @@ import Summary from "./components/Summary/Summary";
 import Supervised from "./components/Supervised/Supervised";
 import Unsupervised from "./components/Unsupervised/Unsupervised";
 import Login from "./components/Login/loginPage";
+import AddBurial from "./components/AddBurial/AddBurial";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/unsupervised" element={<Unsupervised />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/addBurial" element={<AddBurial />} />
         </Routes>
         <div className="container"></div>
       </div>
