@@ -19,12 +19,24 @@ namespace INTEX2.Controllers
         public IActionResult Get()
         {
             var records = from burial in _context.Burialmains
-                          join burialTextile in _context.BurialmainTextiles on burial.Id equals burialTextile.MainBurialmainid
-                          join textile in _context.Textiles on burialTextile.MainTextileid equals textile.Id
-                          join colorTextile in _context.ColorTextiles on textile.Id equals colorTextile.MainTextileid
-                          join color in _context.Colors on colorTextile.MainColorid equals color.Id
-                          join tt in _context.TextilefunctionTextiles on textile.Id equals tt.MainTextileid
-                          join tf in _context.Textilefunctions on tt.MainTextilefunctionid equals tf.Id
+                          join burialTextile in _context.BurialmainTextiles
+                            on burial.Id equals burialTextile.MainBurialmainid into bt
+                          from burialTextile in bt.DefaultIfEmpty()
+                          join textile in _context.Textiles
+                            on burialTextile.MainTextileid equals textile.Id into t
+                          from textile in t.DefaultIfEmpty()
+                          join colorTextile in _context.ColorTextiles
+                            on textile.Id equals colorTextile.MainTextileid into ct
+                          from colorTextile in ct.DefaultIfEmpty()
+                          join color in _context.Colors
+                            on colorTextile.MainColorid equals color.Id into c
+                          from color in c.DefaultIfEmpty()
+                          join textileFunctionTextile in _context.TextilefunctionTextiles
+                            on textile.Id equals textileFunctionTextile.MainTextileid into tft
+                          from textileFunctionTextile in tft.DefaultIfEmpty()
+                          join textileFunction in _context.Textilefunctions
+                            on textileFunctionTextile.MainTextilefunctionid equals textileFunction.Id into tf
+                          from textileFunction in tf.DefaultIfEmpty()
                           select new
                           {
                               burial.Id,
@@ -71,8 +83,8 @@ namespace INTEX2.Controllers
                               textile.Direction,
                               color.Value,
                               color.Colorid,
-                              //tf.Value,
-                              tf.Textilefunctionid
+                              //textileFunction.Value,
+                              //tf.Textilefunctionid
                           };
 
             return Ok(records);
