@@ -25,7 +25,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/addBurial" element={<AddBurial />} />
         </Routes>
-        <div className="container"></div>
       </div>
     </Router>
   );
