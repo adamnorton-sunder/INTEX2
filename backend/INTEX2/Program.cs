@@ -36,18 +36,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles();
 
-// Serve the index.html file from the wwwroot folder for any request that doesn't match a static file.
-app.Use(async (context, next) =>
-{
-    await next();
-
-    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-    {
-        context.Request.Path = "/index.html";
-        await next();
-    }
-});
-
 app.MapControllers();
 
 app.Run();
