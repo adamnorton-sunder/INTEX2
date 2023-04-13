@@ -6,7 +6,7 @@ namespace INTEX2.Models
     public partial class Artifactkomaushimregister
     {
         public long Id { get; set; }
-        public string Provenance { get; set; }
+        public string? Provenance { get; set; }
         public string Description { get; set; }
         public string Position { get; set; }
         public string Qualityphotos { get; set; }
