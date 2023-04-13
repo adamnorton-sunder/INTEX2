@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "cg4RA1LbjB4WXIu90cleImoJ600hX71iICfC5AOVDDY=",
+  "Source": "INTEX2",
+  "BasePath": "_content/INTEX2",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "INTEX2\\wwwroot",
+      "Source": "INTEX2",
+      "ContentRoot": "C:\\Users\\Dallin Blanc\\source\\repos\\INTEX2\\backend\\INTEX2\\wwwroot\\",
+      "BasePath": "_content/INTEX2",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}

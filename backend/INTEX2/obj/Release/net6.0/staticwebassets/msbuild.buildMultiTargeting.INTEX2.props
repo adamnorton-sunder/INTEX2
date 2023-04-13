@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\INTEX2.props" />
+</Project>
