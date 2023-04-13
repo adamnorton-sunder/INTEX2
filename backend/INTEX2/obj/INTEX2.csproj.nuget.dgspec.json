@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dallin Blanc\\source\\repos\\INTEX2\\backend\\INTEX2\\INTEX2.csproj": {}
+    "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dallin Blanc\\source\\repos\\INTEX2\\backend\\INTEX2\\INTEX2.csproj": {
+    "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dallin Blanc\\source\\repos\\INTEX2\\backend\\INTEX2\\INTEX2.csproj",
+        "projectUniqueName": "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2.csproj",
         "projectName": "INTEX2",
-        "projectPath": "C:\\Users\\Dallin Blanc\\source\\repos\\INTEX2\\backend\\INTEX2\\INTEX2.csproj",
-        "packagesPath": "C:\\Users\\Dallin Blanc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dallin Blanc\\source\\repos\\INTEX2\\backend\\INTEX2\\obj\\",
+        "projectPath": "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\INTEX2.csproj",
+        "packagesPath": "C:\\Users\\parkersmith\\.nuget\\packages\\",
+        "outputPath": "\\\\Mac\\Home\\Desktop\\INTEX2\\INTEX2\\backend\\INTEX2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dallin Blanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\parkersmith\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -104,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
