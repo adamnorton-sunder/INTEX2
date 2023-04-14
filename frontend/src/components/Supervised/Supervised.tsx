@@ -1,11 +1,12 @@
 import "../../components/Home/Home.css";
 import { useUserContext } from "../Login/UserContext";
+import styles from '../Unsupervised/Unsupervised.module.css';
 
 function Supervised() {
   const { user } = useUserContext();
 
   return (
-    <section className="page-container">
+    <section className={styles.gradientBG}>
       <div style={{ paddingTop: "40px" }}>
         <h1>SUPERVISED LEARNING MODEL</h1>
         <p>Is authenticated: {user?.isAuthenticated.toString()}</p>
@@ -89,7 +90,7 @@ function Supervised() {
           </p>
         </div>
       </div>
-      <footer style={{ display: "grid", placeItems: "center" }}>
+      <footer style={{ position: 'relative', marginBottom: '100px', height: '100px', display: "grid", placeItems: "center", width: '100%' }}>
         <a href="/privacy" className="white-link">
           Privacy Policy
         </a>

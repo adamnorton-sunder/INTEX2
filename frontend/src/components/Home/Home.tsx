@@ -2,6 +2,7 @@ import "./Home.css";
 import CookieConsent from "react-cookie-consent";
 import Swiper from "../Swiper/Swiper";
 import { Carousel } from "../Carousel/Carousel";
+import styles from '../Unsupervised/Unsupervised.module.css';
 
 function Home() {
   const items = [
@@ -24,9 +25,9 @@ function Home() {
   ];
 
   return (
-    <section className="page-container">
+    <section className={styles.gradientBG}>
       <div style={{ paddingTop: "40px" }}>
-        <h1>HOME</h1>
+        <h1>THE MUMMIES OF FAG EL-GAMOUS</h1>
       </div>
       <div
         style={{ display: "grid", placeItems: "center" }}
@@ -98,7 +99,14 @@ function Home() {
           <span style={{ fontSize: "10px" }}></span>
         </CookieConsent>
       </div>
-      <footer style={{ display: "grid", placeItems: "center" }}>
+      {/* position: relative;
+      margin-bottom: 100px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      /* background: white; */}
+      <footer style={{ position: 'relative', marginBottom: '100px', height: '100px', display: "grid", placeItems: "center", width: '100%' }}>
         <a href="/privacy" className="white-link">
           Privacy Policy
         </a>

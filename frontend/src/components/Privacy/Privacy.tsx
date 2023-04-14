@@ -1,8 +1,9 @@
 import "../../components/Home/Home.css";
+import styles from '../Unsupervised/Unsupervised.module.css';
 
 function Privacy() {
   return (
-    <section className="page-container">
+    <section className={styles.gradientBG}>
       <div style={{ paddingTop: "40px" }}>
         <h1>PRIVACY</h1>
       </div>
@@ -594,7 +595,7 @@ function Privacy() {
           </div>
         </div>
       </div>
-      <footer style={{ display: "grid", placeItems: "center" }}>
+      <footer style={{ position: 'relative', marginBottom: '100px', height: '100px', display: "grid", placeItems: "center", width: '100%' }}>
         <a href="/privacy" className="white-link">
           Privacy Policy
         </a>
