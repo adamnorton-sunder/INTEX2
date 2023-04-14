@@ -1,4 +1,5 @@
 ﻿using INTEX2.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
@@ -8,6 +9,7 @@ using System.Net;
 
 namespace INTEX2.Controllers
 {
+    [EnableCors("AllowAllOrigins")]
     [Route("[controller]")]
     [ApiController]
     public class EgyptController : ControllerBase
