@@ -1,6 +1,10 @@
 ﻿using INTEX2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Net;
 
 namespace INTEX2.Controllers
 {
@@ -91,79 +95,81 @@ namespace INTEX2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] RecordModel record)
+        public IActionResult Post([FromBody] Burialmain burialmain)
         {
-            // Create a new Burialmain object with the appropriate properties
-            var burialMain = new Burialmain
+            if (ModelState.IsValid)
             {
-                Squarenorthsouth = record.Squarenorthsouth,
-                Headdirection = record.Headdirection,
-                Sex = record.Sex,
-                Northsouth = record.Northsouth,
-                Depth = record.Depth,
-                Eastwest = record.Eastwest,
-                Adultsubadult = record.Adultsubadult,
-                Facebundles = record.Facebundles,
-                Southtohead = record.Southtohead,
-                Preservation = record.Preservation,
-                Fieldbookpage = record.Fieldbookpage,
-                Squareeastwest = record.Squareeastwest,
-                Goods = record.Goods,
-                Text = record.Text,
-                Wrapping = record.Wrapping,
-                Haircolor = record.Haircolor,
-                Westtohead = record.Westtohead,
-                Samplescollected = record.Samplescollected,
-                Area = record.Area,
-                Burialid = record.Burialid,
-                Length = record.Length,
-                Burialnumber = record.Burialnumber,
-                Dataexpertinitials = record.Dataexpertinitials,
-                Westtofeet = record.Westtofeet,
-                Ageatdeath = record.Ageatdeath,
-                Southtofeet = record.Southtofeet,
-                Excavationrecorder = record.Excavationrecorder,
-                Photos = record.Photos,
-                Hair = record.Hair,
-                Burialmaterials = record.Burialmaterials,
-                Dateofexcavation = record.Dateofexcavation,
-                Fieldbookexcavationyear = record.Fieldbookexcavationyear,
-                Clusternumber = record.Clusternumber,
-                Shaftnumber = record.Shaftnumber
-            };
+                try
+                {
+                    _context.Burialmains.Add(burialmain);
+                    _context.SaveChanges();
+                    return CreatedAtAction(nameof(Post), new { id = burialmain.Id }, burialmain);
+                }
+                catch (DbUpdateException ex)
+                {
+                    if (ex.InnerException is PostgresException pgEx && pgEx.SqlState == "23505")
+                    {
+                        // Handle duplicate key error
+                        return Conflict();
+                    }
+                    else
+                    {
+                        // Rethrow other exceptions
+                        throw;
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+        }
 
-            // Add the new Burialmain object to the context
-            _context.Burialmains.Add(burialMain);
-
-            // Create a new Textile object with the appropriate properties
-            var textile = new Textile
+        [HttpPut]
+        public async Task<ActionResult> UpdateData(long id, [FromBody] Burialmain data)
+        {
+            var existingData = await _context.Burialmains.FindAsync(id);
+            if (existingData == null)
             {
-                Locale = record.Locale,
-                Textileid = record.Textileid,
-                Description = record.Description,
-                Estimatedperiod = record.Estimatedperiod,
-                Sampledate = record.Sampledate,
-                Photographeddate = record.Photographeddate,
-                Direction = record.Direction
-            };
+                return NotFound();
+            }
 
-            // Add the new Textile object to the context
-            _context.Textiles.Add(textile);
+            existingData.Squarenorthsouth = data.Squarenorthsouth;
+            existingData.Headdirection = data.Headdirection;
+            existingData.Sex = data.Sex;
+            existingData.Northsouth = data.Northsouth;
+            existingData.Depth = data.Depth;
+            existingData.Eastwest = data.Eastwest;
+            existingData.Adultsubadult = data.Adultsubadult;
+            existingData.Facebundles = data.Facebundles;
+            existingData.Southtohead = data.Southtohead;
+            existingData.Preservation = data.Preservation;
+            existingData.Fieldbookpage = data.Fieldbookpage;
+            existingData.Squareeastwest = data.Squareeastwest;
+            existingData.Goods = data.Goods;
+            existingData.Text = data.Text;
+            existingData.Wrapping = data.Wrapping;
+            existingData.Haircolor = data.Haircolor;
+            existingData.Westtohead = data.Westtohead;
+            existingData.Samplescollected = data.Samplescollected;
+            existingData.Area = data.Area;
+            existingData.Burialid = data.Burialid;
+            existingData.Length = data.Length;
+            existingData.Burialnumber = data.Burialnumber;
+            existingData.Dataexpertinitials = data.Dataexpertinitials;
+            existingData.Westtofeet = data.Westtofeet;
+            existingData.Ageatdeath = data.Ageatdeath;
+            existingData.Southtofeet = data.Southtofeet;
+            existingData.Excavationrecorder = data.Excavationrecorder;
+            existingData.Photos = data.Photos;
+            existingData.Hair = data.Hair;
+            existingData.Burialmaterials = data.Burialmaterials;
+            existingData.Dateofexcavation = data.Dateofexcavation;
+            existingData.Fieldbookexcavationyear = data.Fieldbookexcavationyear;
+            existingData.Clusternumber = data.Clusternumber;
+            existingData.Shaftnumber = data.Shaftnumber;
 
-            // Create a new Color object with the appropriate properties
-            var color = new Color
-            {
-                Value = record.Value
-            };
+            await _context.SaveChangesAsync();
 
-            // Add the new Color object to the context
-            _context.Colors.Add(color);
+            return Ok(existingData);
 
-            // Save the changes to the database
-            _context.SaveChanges();
-
-            // Return a success response
-            return Ok();
         }
     }
 }

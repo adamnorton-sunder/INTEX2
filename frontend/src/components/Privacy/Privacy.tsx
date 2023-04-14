@@ -1,11 +1,18 @@
 import "../../components/Home/Home.css";
+import styles from '../Unsupervised/Unsupervised.module.css';
 
 function Privacy() {
   return (
-    <section className="page-container">
+    <section>
       <div style={{ paddingTop: "40px" }}>
         <h1>PRIVACY</h1>
       </div>
+
+      <div style={{ display: 'grid', placeItems: 'center', margin: '30px' }}>
+        <div className={styles.rect}>
+        </div>
+      </div>
+
       <div
         style={{ display: "grid", placeItems: "center" }}
         className="content-wrap"
@@ -594,7 +601,7 @@ function Privacy() {
           </div>
         </div>
       </div>
-      <footer style={{ display: "grid", placeItems: "center" }}>
+      <footer style={{ position: 'relative', marginBottom: '100px', height: '100px', display: "grid", placeItems: "center", width: '100%' }}>
         <a href="/privacy" className="white-link">
           Privacy Policy
         </a>

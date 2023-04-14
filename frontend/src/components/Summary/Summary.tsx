@@ -27,14 +27,15 @@ function Summary() {
 
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-  const toggleFilters = ['Textile Structure', 'Burial Depth', 'Estimate Stature', 'Burial ID', 'Textile Function', 'Presence of Face Bundle', 'Ribbons'];
-  const textileColorFilters = ['Red', 'Blue', 'Black', 'White']
+  const toggleFilters = ['Colored Textile', 'Estimate Stature', 'Burial ID', 'Textile Function', 'Presence of Face Bundle', 'Ribbons'];
+  const depthFilters = ['0 - 1 Meters', '1 - 2 Meters', '2 - 3 Meters', '3 - 4 Meters']
+  const lengthFilters = ['0 - 0.5 Meters', '0.5 - 1.0 Meters', '1.0 - 1.5 Meters', '1.5 - 2.0 Meters']
   const ageAtDeathFilters = ['Newborn', 'Infant', 'Child', 'Adult']
-  const headDirectionFilters = ['East', 'West']
+  const headDirectionFilters = ['East Head Direction', 'West Head Direction']
   const sexFilters = ['Male', 'Female']
-  const hairColorFilters = ['Brown', 'Black', 'Other']
+  const hairColorFilters = ['Brown Hair', 'Black Hair', 'Red Hair', 'Blond Hair', 'Unknown Hair Color']
 
-  const columnsToInclude = ['id', 'headdirection', 'sex', 'depth', 'facebundles', 'preservation', 'haircolor', 'hair', 'length', 'ageatdeath', 'burialnumber', 'dateofexcavation'];
+  const columnsToInclude = ['id', 'headdirection', 'sex', 'depth', 'facebundles', 'preservation', 'haircolor', 'hair', 'length', 'ageatdeath', 'burialnumber', 'textileid', 'value'];
   const itemsPerPage = 15;
 
   const handleFilterClick = (filterName: string) => {
@@ -47,8 +48,8 @@ function Summary() {
 
   return (
     <section className="page-container">
-      <div style={{ display: 'grid', gridTemplateColumns: '25% 1fr' }}>
-        <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '50px 20px 35px 20px', textAlign: 'left', height: '100vh' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '28% 1fr' }}>
+        <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '50px 27px 180px 35px', textAlign: 'left', height: '100vh', overflowY: 'scroll' }}>
           <div style={{ marginBottom: '20px' }}>
             <h3 style={{ letterSpacing: '5px', margin: '0px' }}>FILTERS</h3>
           </div>
@@ -65,11 +66,11 @@ function Summary() {
           </div>
 
           <div>
-            <h3 style={{ letterSpacing: '5px' }}>TEXTILE COLOR</h3>
+            <h3 style={{ letterSpacing: '5px' }}>DEPTH</h3>
           </div>
 
           <div>
-            {textileColorFilters.map((filter) => (
+            {depthFilters.map((filter) => (
               <FilterButton
                 key={filter}
                 name={filter}
@@ -138,7 +139,23 @@ function Summary() {
               />
             ))}
           </div>
+
+          <div>
+            <h3 style={{ letterSpacing: '5px' }}>LENGTH</h3>
+          </div>
+
+          <div>
+            {lengthFilters.map((filter) => (
+              <FilterButton
+                key={filter}
+                name={filter}
+                isSelected={selectedFilters.includes(filter)}
+                onClick={() => handleFilterClick(filter)}
+              />
+            ))}
+          </div>
         </div>
+
         <div>
           <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', padding: '50px 100px 30px' }}>
             <h3 style={{ letterSpacing: '5px', margin: '0px' }}>BURIAL DATA</h3>
@@ -151,11 +168,11 @@ function Summary() {
           </div>
 
           <div style={{ display: 'grid', placeItems: 'center' }}>
-            <DataTable data={burialData} columnsToInclude={columnsToInclude} itemsPerPage={itemsPerPage} />
+            <DataTable data={burialData} columnsToInclude={columnsToInclude} itemsPerPage={itemsPerPage} appliedFilters={selectedFilters} />
           </div>
         </div>
       </div>
-      <footer style={{ display: "grid", placeItems: "center" }}>
+      <footer style={{ position: 'relative', marginBottom: '100px', height: '100px', display: "grid", placeItems: "center", width: '100%' }}>
         <a href="/privacy" className="white-link">
           Privacy Policy
         </a>

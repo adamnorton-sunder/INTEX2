@@ -7,14 +7,9 @@ namespace INTEX2.Models
 {
     public partial class postgresContext : DbContext
     {
-        public postgresContext()
-        {
-        }
+        public postgresContext() { }
 
-        public postgresContext(DbContextOptions<postgresContext> options)
-            : base(options)
-        {
-        }
+        public postgresContext(DbContextOptions<postgresContext> options) : base(options) { }
 
         public virtual DbSet<Analysis> Analyses { get; set; }
         public virtual DbSet<AnalysisTextile> AnalysisTextiles { get; set; }

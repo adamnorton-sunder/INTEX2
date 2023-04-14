@@ -31,8 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors(p => p.WithOrigins("http://localhost:3000"));
-app.UseCors(p => p.WithOrigins("https://www.byumummycollection.net"));
+app.UseCors(p => p.WithOrigins("http://localhost:3000", "https://www.byumummycollection.net"));
 
 app.UseHttpsRedirection();
 

@@ -1,0 +1,17 @@
+.mlImg {
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 4px 4px 0px #ef9e12;
+}
+
+.gradientBG {
+    background: radial-gradient(circle at 50% -40%, #ef9e12, #ef9e12 20%, #000 40%, #000 40%);
+    width: 100%;
+}
+
+.rect {
+    width: 80px;
+    height: 10px;
+    background-color: #ef9e12;
+}

@@ -8,7 +8,9 @@ function Navbar() {
   return (
     <section className="Navbar">
       <Link to="/">
-        <div className="NavButton">Logo</div>
+        <div className="NavButton">
+          <img className="logoImg" src={`${process.env.PUBLIC_URL}/INTEX-Winter-2023-Logo.png`} />
+        </div>
       </Link>
       <Link to="/">
         <div className="NavButton btn">HOME</div>

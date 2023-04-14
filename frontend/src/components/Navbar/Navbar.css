@@ -38,3 +38,8 @@ a {
   background-color: #000;
   color: #ffffff;
 }
+
+.logoImg {
+  max-height: 24px;
+  width: auto;
+}

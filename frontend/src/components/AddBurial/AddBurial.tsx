@@ -1,11 +1,14 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import './AddBurial.css';
 import { BurialRecord } from "../../BurialRecord.interface";
 import { useState } from "react";
+import styles from '../Unsupervised/Unsupervised.module.css';
 
 function AddBurial() {
     const location = useLocation();
-    const recordToEdit = location.state?.recordToAdd;
+    const navigate = useNavigate();
+    const recordToEdit = location.state?.recordToEdit;
+    const editMode: boolean = !!location.state?.recordToEdit;
 
     const [recordToAdd, setRecordToAdd] = useState(recordToEdit || {
         id: 0,
@@ -59,14 +62,53 @@ function AddBurial() {
         setShowAdvancedFields(!showAdvancedFields);
     };
 
+    const addNewRecord = async (data: any) => {
+        const res = await fetch('https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const response = await res.json();
+        console.log('POST request response:', response);
+    };
+
+    const editRecord = async (recordId: string, updatedData: any) => {
+        const res = await fetch(`https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt/${recordId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        });
+        const response = await res.json();
+        console.log('PUT request response:', response);
+    };
+
+    const deleteRecord = async (recordId: string) => {
+        const res = await fetch(`https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt/${recordId}`, {
+          method: 'DELETE',
+        });
+        const response = await res.json();
+        console.log('DELETE request response:', response);
+    };
+
     const handleSaveRecord = () => {
+        if (editMode) {
+            editRecord(recordToAdd.id, recordToAdd);
+        }
+        if (!editMode) {
+            addNewRecord(recordToAdd);
+        }
+
         console.log(recordToAdd);
-        // TO-DO: POST or PUT HTTP REQUEST
+        // navigate('/summary')
     };
 
     const handleDeleteRecord = () => {
         console.log(recordToAdd);
-        // TO-DO: DELETE HTTP REQUEST
+        deleteRecord(recordToAdd.id);
     };
 
     return (
@@ -76,193 +118,126 @@ function AddBurial() {
                     <h3 style={{ letterSpacing: '5px', margin: '0px', fontSize: '14px', color: '#ef9e12' }}>BACK</h3>
                 </button>
             </Link>
-            <div style={{ padding: '40px 0' }}>
-                <h3 style={{ letterSpacing: '5px', margin: '0px' }}>ADD BURIAL</h3>
+            {editMode &&
+                <div style={{ padding: '40px 0 0' }}>
+                    <h1 style={{ letterSpacing: '5px', margin: '0px' }}>EDIT BURIAL</h1>
+                </div>
+            }
+            {!editMode &&
+                <div style={{ padding: '40px 0 0' }}>
+                    <h1 style={{ letterSpacing: '5px', margin: '0px' }}>ADD BURIAL</h1>
+                </div>
+            }
+
+            <div style={{ padding: '0px 0px 40px' }}>
+                <h3 style={{ letterSpacing: '5px', margin: '0px', fontSize: '14px', color: '#ef9e12' }}>ID: {recordToAdd.id}</h3>
             </div>
 
-            <section style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px', rowGap: '60px' }}>
+            <div style={{ display: 'grid', placeItems: 'start', marginBottom: '25px' }}>
+                <div className={styles.rect}>
+                </div>
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '200px 140px 200px 140px 200px 140px 200px 190px' }}>
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>GENDER</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.sex === 'male' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, sex: 'male' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Male</h3>
-                        </button>
-                        <button className={recordToAdd.sex === 'female' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, sex: 'female' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Female</h3>
-                        </button>
-                    </div>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>ID: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>BURIAL ID: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>BURIAL NUMBER: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SQUARE NORTH SOUTH: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>NORTH SOUTH: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SQUARE EAST WEST: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>EAST WEST: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>AREA: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>CLUSTER NUMBER: </p>
+                </div>
+                <div>
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.id} onChange={(event) => setRecordToAdd({ ...recordToAdd, id: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.burialid} onChange={(event) => setRecordToAdd({ ...recordToAdd, burialid: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.burialnumber} onChange={(event) => setRecordToAdd({ ...recordToAdd, burialnumber: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.squarenorthsouth} onChange={(event) => setRecordToAdd({ ...recordToAdd, squarenorthsouth: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.northsouth} onChange={(event) => setRecordToAdd({ ...recordToAdd, northsouth: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.squareeastwest} onChange={(event) => setRecordToAdd({ ...recordToAdd, squareeastwest: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.eastwest} onChange={(event) => setRecordToAdd({ ...recordToAdd, eastwest: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.area} onChange={(event) => setRecordToAdd({ ...recordToAdd, area: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.clusternumber} onChange={(event) => setRecordToAdd({ ...recordToAdd, clusternumber: +event.target.value })} />
                 </div>
 
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>EAST / WEST</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.eastwest === 0 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, eastwest: 0 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>East</h3>
-                        </button>
-                        <button className={recordToAdd.eastwest === 1 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, eastwest: 1 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>West</h3>
-                        </button>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateRows: 'auto auto' }}>
-                        <label>Square East / West</label>
-                        <input type="number" onChange={(event) => setRecordToAdd({ ...recordToAdd, squareeastwest: +event.target.value})} placeholder="square east west" style={{ padding: '16px', border: '1px solid #4c4c4c', backgroundColor: 'transparent', borderRadius: '10px' }} />
-                    </div>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SEX: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>ADULT SUB ADULT: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>AGE AT DEATH: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>HAIR: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>HAIR COLOR: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>FACE BUNDLES: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>PRESERVATION: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>WRAPPING: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>BURIAL MATERIALS: </p>
+                </div>
+                <div>
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.sex} onChange={(event) => setRecordToAdd({ ...recordToAdd, sex: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.adultsubadult} onChange={(event) => setRecordToAdd({ ...recordToAdd, adultsubadult: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.ageatdeath} onChange={(event) => setRecordToAdd({ ...recordToAdd, ageatdeath: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.hair} onChange={(event) => setRecordToAdd({ ...recordToAdd, hair: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.haircolor} onChange={(event) => setRecordToAdd({ ...recordToAdd, haircolor: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.facebundles} onChange={(event) => setRecordToAdd({ ...recordToAdd, facebundles: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.preservation} onChange={(event) => setRecordToAdd({ ...recordToAdd, preservation: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.wrapping} onChange={(event) => setRecordToAdd({ ...recordToAdd, wrapping: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.burialmaterials} onChange={(event) => setRecordToAdd({ ...recordToAdd, burialmaterials: event.target.value })} />
                 </div>
 
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>NORTH / SOUTH</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.northsouth === 0 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, northsouth: 0 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>North</h3>
-                        </button>
-                        <button className={recordToAdd.northsouth === 5 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, northsouth: 5 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>South</h3>
-                        </button>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateRows: 'auto auto' }}>
-                        <label>Square North / South</label>
-                        <input type="number" onChange={(event) => setRecordToAdd({ ...recordToAdd, squarenorthsouth: +event.target.value})} placeholder="square north south" style={{ padding: '16px', border: '1px solid #4c4c4c', backgroundColor: 'transparent', borderRadius: '10px' }} />
-                    </div>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>DEPTH: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>LENGTH: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>HEAD DIRECTION: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SOUTH TO HEAD: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SOUTH TO FEET: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>WEST TO HEAD: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>WEST TO FEET: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>FIELD BOOK PAGE: </p>
+                </div>
+                <div>
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.depth} onChange={(event) => setRecordToAdd({ ...recordToAdd, depth: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.length} onChange={(event) => setRecordToAdd({ ...recordToAdd, length: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.headdirection} onChange={(event) => setRecordToAdd({ ...recordToAdd, headdirection: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.southtohead} onChange={(event) => setRecordToAdd({ ...recordToAdd, southtohead: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.southtofeet} onChange={(event) => setRecordToAdd({ ...recordToAdd, southtofeet: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.westtohead} onChange={(event) => setRecordToAdd({ ...recordToAdd, westtohead: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.westtofeet} onChange={(event) => setRecordToAdd({ ...recordToAdd, westtofeet: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.fieldbookpage} onChange={(event) => setRecordToAdd({ ...recordToAdd, fieldbookpage: +event.target.value })} />
                 </div>
 
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>HAIR</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.hair === 'yes' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, hair: 'yes' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Yes</h3>
-                        </button>
-                        <button className={recordToAdd.hair === 'no' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, hair: 'no' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>No</h3>
-                        </button>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.haircolor === 'brown' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, haircolor: 'brown' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Brown</h3>
-                        </button>
-                        <button className={recordToAdd.haircolor === 'black' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, haircolor: 'black' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Black</h3>
-                        </button>
-                        <button className={recordToAdd.haircolor === 'unknown' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, haircolor: 'unknown' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Unknown</h3>
-                        </button>
-                    </div>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>GOODS: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>EXCAVATION RECORDER: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SAMPLES COLLECTED: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>DATA EXPERT INITIALS: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SHAFT NUMBER: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>FIELD BOOK EXC. YEAR: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>PHOTOS: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>DATE OF EXCAVATION: </p>
                 </div>
-
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>HEAD DIRECTION</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.headdirection === 'E' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, headdirection: 'E' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>East</h3>
-                        </button>
-                        <button className={recordToAdd.headdirection === 'W' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, headdirection: 'W' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>West</h3>
-                        </button>
-                    </div>
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.goods} onChange={(event) => setRecordToAdd({ ...recordToAdd, goods: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.excavationrecorder} onChange={(event) => setRecordToAdd({ ...recordToAdd, excavationrecorder: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.samplescollected} onChange={(event) => setRecordToAdd({ ...recordToAdd, samplescollected: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.dataexpertinitials} onChange={(event) => setRecordToAdd({ ...recordToAdd, dataexpertinitials: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.shaftnumber} onChange={(event) => setRecordToAdd({ ...recordToAdd, shaftnumber: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.fieldbookexcavationyear} onChange={(event) => setRecordToAdd({ ...recordToAdd, fieldbookexcavationyear: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.photos} onChange={(event) => setRecordToAdd({ ...recordToAdd, photos: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.dateofexcavation} onChange={(event) => setRecordToAdd({ ...recordToAdd, dateofexcavation: event.target.value })} />
                 </div>
+            </div>
 
+            <div style={{ marginTop: '40px' }}>
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>FACE BUNDLES</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.facebundles === true ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, facebundles: true })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Yes</h3>
-                        </button>
-                    </div>
+                    <p>TEXT: </p>
+                    <input style={{ fontWeight: '700', minWidth: '500px' }} value={recordToAdd.text} onChange={(event) => setRecordToAdd({ ...recordToAdd, text: event.target.value })} />
                 </div>
-
                 <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>PRESERVATION</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px 100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.preservation === 1 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, preservation: 1 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Poor</h3>
-                        </button>
-                        <button className={recordToAdd.preservation === 2 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, preservation: 2 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Average</h3>
-                        </button>
-                        <button className={recordToAdd.preservation === 3 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, preservation: 3 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Good</h3>
-                        </button>
-                        <button className={recordToAdd.preservation === 4 ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, preservation: 4 })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Excellent</h3>
-                        </button>
-                    </div>
+                    <p>TEXTILE DESCRIPTION: </p>
+                    <input style={{ fontWeight: '700', minWidth: '500px' }} value={recordToAdd.description} onChange={(event) => setRecordToAdd({ ...recordToAdd, description: event.target.value })} />
                 </div>
-
-                <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>PHOTOS</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.photos === true ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, photos: true })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Yes</h3>
-                        </button>
-                    </div>
-                </div>
-
-                <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>BURIAL ID</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateRows: 'auto auto' }}>
-                        <label>Burial ID</label>
-                        <input type="number" onChange={(event) => setRecordToAdd({ ...recordToAdd, burialid: +event.target.value})} placeholder="burial id" style={{ padding: '16px', border: '1px solid #4c4c4c', backgroundColor: 'transparent', borderRadius: '10px' }} />
-                    </div>
-                </div>
-
-                <div>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>Age At Death</h4>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '100px 100px 100px 100px', gap: '20px', marginBottom: '20px' }}>
-                        <button className={recordToAdd.ageatdeath === 'N' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, ageatdeath: 'N' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Newborn</h3>
-                        </button>
-                        <button className={recordToAdd.ageatdeath === 'I' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, ageatdeath: 'I' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Infant</h3>
-                        </button>
-                        <button className={recordToAdd.ageatdeath === 'C' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, ageatdeath: 'C' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Child</h3>
-                        </button>
-                        <button className={recordToAdd.ageatdeath === 'A' ? "selectedOptionButton" : "optionButton"} onClick={() => setRecordToAdd({ ...recordToAdd, ageatdeath: 'A' })}>
-                            <h3 style={{ margin: '0px', fontSize: '14px' }}>Adult</h3>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-
-            <button className={showAdvancedFields === true ? "selectedOptionButton" : "optionButton"} onClick={handleToggleAdvancedFields} style={{ marginTop: '30px', marginRight: '20px' }}>
-                <h3 style={{ margin: '0px', fontSize: '14px' }}>Show Advanced Fields</h3>
-            </button>
-
-            {showAdvancedFields && (
-                <section>
-                    <div style={{ padding: '10px' }}>
-                        <h4 style={{ letterSpacing: '5px', margin: '0px' }}>Additional Fields</h4>
-                    </div>
-                    <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', columnGap: '20px', rowGap: '10px' }}>
-                        {fields.map((key) => (
-                            <div style={{ display: 'grid', gridTemplateRows: 'auto auto' }}>
-                                <label>{key}</label>
-                                <input type="number" onChange={(event) => setRecordToAdd({ ...recordToAdd, [key]: +event.target.value})} key={key} placeholder={key} style={{ padding: '16px', border: '1px solid #4c4c4c', backgroundColor: 'transparent', borderRadius: '10px' }} />
-                            </div>
-                        ))}
-                    </section>
-                </section>
-            )}
+            </div>
 
             <button className="saveButton" onClick={handleSaveRecord} style={{ marginTop: '30px', marginRight: '20px' }}>
                 <h3 style={{ margin: '0px', fontSize: '14px', color: '#ef9e12' }}>Save Record</h3>
