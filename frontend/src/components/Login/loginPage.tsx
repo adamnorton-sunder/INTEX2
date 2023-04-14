@@ -7,6 +7,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import './Login.css';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { useUserContext } from './UserContext';
+import styles from '../Summary/Summary.module.css';
 
 
 Amplify.configure(awsExports);
@@ -49,9 +50,11 @@ function Login(props: any) {
 
   return (
     <>
-      <h1>Hello {user?.name}</h1>
-      <button onClick={handleSignOut}>Sign out</button>
-      <p>Is authenticated: {user?.isAuthenticated.toString()}</p>
+      <h1>{user?.name}</h1>
+      <button className={styles.addButton} onClick={handleSignOut}>
+        <h3 style={{ letterSpacing: '5px', margin: '0px', fontSize: '14px' }}>SIGN OUT</h3>
+      </button>
+      <p style={{ marginTop: '40px' }}>Is authenticated: {user?.isAuthenticated.toString()}</p>
     </>
   );
 }
