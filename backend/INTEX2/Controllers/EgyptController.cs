@@ -89,5 +89,81 @@ namespace INTEX2.Controllers
 
             return Ok(records);
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] RecordModel record)
+        {
+            // Create a new Burialmain object with the appropriate properties
+            var burialMain = new Burialmain
+            {
+                Squarenorthsouth = record.Squarenorthsouth,
+                Headdirection = record.Headdirection,
+                Sex = record.Sex,
+                Northsouth = record.Northsouth,
+                Depth = record.Depth,
+                Eastwest = record.Eastwest,
+                Adultsubadult = record.Adultsubadult,
+                Facebundles = record.Facebundles,
+                Southtohead = record.Southtohead,
+                Preservation = record.Preservation,
+                Fieldbookpage = record.Fieldbookpage,
+                Squareeastwest = record.Squareeastwest,
+                Goods = record.Goods,
+                Text = record.Text,
+                Wrapping = record.Wrapping,
+                Haircolor = record.Haircolor,
+                Westtohead = record.Westtohead,
+                Samplescollected = record.Samplescollected,
+                Area = record.Area,
+                Burialid = record.Burialid,
+                Length = record.Length,
+                Burialnumber = record.Burialnumber,
+                Dataexpertinitials = record.Dataexpertinitials,
+                Westtofeet = record.Westtofeet,
+                Ageatdeath = record.Ageatdeath,
+                Southtofeet = record.Southtofeet,
+                Excavationrecorder = record.Excavationrecorder,
+                Photos = record.Photos,
+                Hair = record.Hair,
+                Burialmaterials = record.Burialmaterials,
+                Dateofexcavation = record.Dateofexcavation,
+                Fieldbookexcavationyear = record.Fieldbookexcavationyear,
+                Clusternumber = record.Clusternumber,
+                Shaftnumber = record.Shaftnumber
+            };
+
+            // Add the new Burialmain object to the context
+            _context.Burialmains.Add(burialMain);
+
+            // Create a new Textile object with the appropriate properties
+            var textile = new Textile
+            {
+                Locale = record.Locale,
+                Textileid = record.Textileid,
+                Description = record.Description,
+                Estimatedperiod = record.Estimatedperiod,
+                Sampledate = record.Sampledate,
+                Photographeddate = record.Photographeddate,
+                Direction = record.Direction
+            };
+
+            // Add the new Textile object to the context
+            _context.Textiles.Add(textile);
+
+            // Create a new Color object with the appropriate properties
+            var color = new Color
+            {
+                Value = record.Value
+            };
+
+            // Add the new Color object to the context
+            _context.Colors.Add(color);
+
+            // Save the changes to the database
+            _context.SaveChanges();
+
+            // Return a success response
+            return Ok();
+        }
     }
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace INTEX2.Models
+﻿namespace INTEX2.Models
 {
-    public partial class Burialmain
+    public class RecordModel
     {
-        [Key]
-        public long Id { get; set; }
+        // Properties for Burialmain table
         public string? Squarenorthsouth { get; set; }
         public string? Headdirection { get; set; }
         public string? Sex { get; set; }
@@ -27,7 +22,7 @@ namespace INTEX2.Models
         public string? Westtohead { get; set; }
         public string? Samplescollected { get; set; }
         public string? Area { get; set; }
-        public long? Burialid { get; set; }
+        public long Burialid { get; set; }
         public string? Length { get; set; }
         public string? Burialnumber { get; set; }
         public string? Dataexpertinitials { get; set; }
@@ -38,9 +33,26 @@ namespace INTEX2.Models
         public string? Photos { get; set; }
         public string? Hair { get; set; }
         public string? Burialmaterials { get; set; }
-        public DateTime? Dateofexcavation { get; set; }
+        public DateTime Dateofexcavation { get; set; }
         public string? Fieldbookexcavationyear { get; set; }
         public string? Clusternumber { get; set; }
         public string? Shaftnumber { get; set; }
+
+        // Properties for Textiles table
+        public string? Locale { get; set; }
+        public int Textileid { get; set; }
+        public string? Description { get; set; }
+        public string? Estimatedperiod { get; set; }
+        public DateTime Sampledate { get; set; }
+        public DateTime Photographeddate { get; set; }
+        public string? Direction { get; set; }
+
+        // Properties for Colors table
+        public string? Value { get; set; }
+        public int Colorid { get; set; }
+
+        // Properties for Textilefunctions table
+        public string? TextileFunctionValue { get; set; }
+        public int Textilefunctionid { get; set; }
     }
 }
