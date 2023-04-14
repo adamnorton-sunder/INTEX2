@@ -8,6 +8,7 @@ function AddBurial() {
     const location = useLocation();
     const navigate = useNavigate();
     const recordToEdit = location.state?.recordToEdit;
+    const editMode: boolean = !!location.state?.recordToEdit;
 
     const [recordToAdd, setRecordToAdd] = useState(recordToEdit || {
         id: 0,
@@ -61,9 +62,28 @@ function AddBurial() {
         setShowAdvancedFields(!showAdvancedFields);
     };
 
+    const addNewRecord = async (data: any) => {
+        const res = await fetch('https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        const response = await res.json();
+        console.log('POST request response:', response);
+    };
+
     const handleSaveRecord = () => {
+        if (editMode) {
+            // PUT HTTP
+        }
+        if (!editMode) {
+            addNewRecord(recordToAdd);
+        }
+
         console.log(recordToAdd);
-        navigate('/summary')
+        // navigate('/summary')
     };
 
     const handleDeleteRecord = () => {
@@ -78,9 +98,17 @@ function AddBurial() {
                     <h3 style={{ letterSpacing: '5px', margin: '0px', fontSize: '14px', color: '#ef9e12' }}>BACK</h3>
                 </button>
             </Link>
-            <div style={{ padding: '40px 0 0' }}>
-                <h1 style={{ letterSpacing: '5px', margin: '0px' }}>EDIT BURIAL</h1>
-            </div>
+            {editMode &&
+                <div style={{ padding: '40px 0 0' }}>
+                    <h1 style={{ letterSpacing: '5px', margin: '0px' }}>EDIT BURIAL</h1>
+                </div>
+            }
+            {!editMode &&
+                <div style={{ padding: '40px 0 0' }}>
+                    <h1 style={{ letterSpacing: '5px', margin: '0px' }}>ADD BURIAL</h1>
+                </div>
+            }
+
             <div style={{ padding: '0px 0px 40px' }}>
                 <h3 style={{ letterSpacing: '5px', margin: '0px', fontSize: '14px', color: '#ef9e12' }}>ID: {recordToAdd.id}</h3>
             </div>
@@ -92,6 +120,7 @@ function AddBurial() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '200px 140px 200px 140px 200px 140px 200px 190px' }}>
                 <div>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>ID: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>BURIAL ID: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>BURIAL NUMBER: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>SQUARE NORTH SOUTH: </p>
@@ -102,14 +131,15 @@ function AddBurial() {
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>CLUSTER NUMBER: </p>
                 </div>
                 <div>
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.burialid} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.burialnumber} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.squarenorthsouth} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.northsouth} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.squareeastwest} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.eastwest} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.area} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.clusternumber} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.id} onChange={(event) => setRecordToAdd({ ...recordToAdd, id: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.burialid} onChange={(event) => setRecordToAdd({ ...recordToAdd, burialid: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.burialnumber} onChange={(event) => setRecordToAdd({ ...recordToAdd, burialnumber: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.squarenorthsouth} onChange={(event) => setRecordToAdd({ ...recordToAdd, squarenorthsouth: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.northsouth} onChange={(event) => setRecordToAdd({ ...recordToAdd, northsouth: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.squareeastwest} onChange={(event) => setRecordToAdd({ ...recordToAdd, squareeastwest: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.eastwest} onChange={(event) => setRecordToAdd({ ...recordToAdd, eastwest: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.area} onChange={(event) => setRecordToAdd({ ...recordToAdd, area: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.clusternumber} onChange={(event) => setRecordToAdd({ ...recordToAdd, clusternumber: +event.target.value })} />
                 </div>
 
                 <div>
@@ -121,16 +151,18 @@ function AddBurial() {
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>FACE BUNDLES: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>PRESERVATION: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>WRAPPING: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>BURIAL MATERIALS: </p>
                 </div>
                 <div>
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.sex ? recordToAdd.sex : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.adultsubadult ? recordToAdd.adultsubadult : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.ageatdeath ? recordToAdd.ageatdeath : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.hair ? recordToAdd.hair : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.haircolor ? recordToAdd.haircolor : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.facebundles ? recordToAdd.facebundles : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.preservation ? recordToAdd.preservation : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.wrapping ? recordToAdd.wrapping : '-'} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.sex} onChange={(event) => setRecordToAdd({ ...recordToAdd, sex: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.adultsubadult} onChange={(event) => setRecordToAdd({ ...recordToAdd, adultsubadult: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.ageatdeath} onChange={(event) => setRecordToAdd({ ...recordToAdd, ageatdeath: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.hair} onChange={(event) => setRecordToAdd({ ...recordToAdd, hair: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.haircolor} onChange={(event) => setRecordToAdd({ ...recordToAdd, haircolor: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.facebundles} onChange={(event) => setRecordToAdd({ ...recordToAdd, facebundles: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.preservation} onChange={(event) => setRecordToAdd({ ...recordToAdd, preservation: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.wrapping} onChange={(event) => setRecordToAdd({ ...recordToAdd, wrapping: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.burialmaterials} onChange={(event) => setRecordToAdd({ ...recordToAdd, burialmaterials: event.target.value })} />
                 </div>
 
                 <div>
@@ -144,14 +176,14 @@ function AddBurial() {
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>FIELD BOOK PAGE: </p>
                 </div>
                 <div>
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.depth ? recordToAdd.depth : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.length ? recordToAdd.length : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.headdirection ? recordToAdd.headdirection : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.southtohead ? recordToAdd.southtohead : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.southtofeet ? recordToAdd.southtofeet : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.westtohead ? recordToAdd.westtohead : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.westtofeet ? recordToAdd.westtofeet : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.fieldbookpage ? recordToAdd.fieldbookpage : '-'} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.depth} onChange={(event) => setRecordToAdd({ ...recordToAdd, depth: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.length} onChange={(event) => setRecordToAdd({ ...recordToAdd, length: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.headdirection} onChange={(event) => setRecordToAdd({ ...recordToAdd, headdirection: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.southtohead} onChange={(event) => setRecordToAdd({ ...recordToAdd, southtohead: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.southtofeet} onChange={(event) => setRecordToAdd({ ...recordToAdd, southtofeet: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.westtohead} onChange={(event) => setRecordToAdd({ ...recordToAdd, westtohead: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.westtofeet} onChange={(event) => setRecordToAdd({ ...recordToAdd, westtofeet: +event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.fieldbookpage} onChange={(event) => setRecordToAdd({ ...recordToAdd, fieldbookpage: +event.target.value })} />
                 </div>
 
                 <div>
@@ -159,23 +191,31 @@ function AddBurial() {
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>EXCAVATION RECORDER: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>SAMPLES COLLECTED: </p>
                     <p style={{ color: 'rgba(255,255,255,0.7)' }}>DATA EXPERT INITIALS: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>SHAFT NUMBER: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>FIELD BOOK EXC. YEAR: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>PHOTOS: </p>
+                    <p style={{ color: 'rgba(255,255,255,0.7)' }}>DATE OF EXCAVATION: </p>
                 </div>
                 <div>
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.goods ? recordToAdd.goods : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.excavationrecorder ? recordToAdd.excavationrecorder : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.samplescollected ? recordToAdd.samplescollected : '-'} />
-                    <input style={{ fontWeight: '700'}} value={recordToAdd.dataexpertinitials ? recordToAdd.dataexpertinitials : '-'} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.goods} onChange={(event) => setRecordToAdd({ ...recordToAdd, goods: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.excavationrecorder} onChange={(event) => setRecordToAdd({ ...recordToAdd, excavationrecorder: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.samplescollected} onChange={(event) => setRecordToAdd({ ...recordToAdd, samplescollected: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.dataexpertinitials} onChange={(event) => setRecordToAdd({ ...recordToAdd, dataexpertinitials: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.shaftnumber} onChange={(event) => setRecordToAdd({ ...recordToAdd, shaftnumber: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.fieldbookexcavationyear} onChange={(event) => setRecordToAdd({ ...recordToAdd, fieldbookexcavationyear: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.photos} onChange={(event) => setRecordToAdd({ ...recordToAdd, photos: event.target.value })} />
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.dateofexcavation} onChange={(event) => setRecordToAdd({ ...recordToAdd, dateofexcavation: event.target.value })} />
                 </div>
             </div>
 
-            <div style={{ marginTop: '40px'}}>
+            <div style={{ marginTop: '40px' }}>
                 <div>
                     <p>TEXT: </p>
-                    <p>{recordToAdd.text}</p>
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.text} onChange={(event) => setRecordToAdd({ ...recordToAdd, text: event.target.value })} />
                 </div>
                 <div>
                     <p>TEXTILE DESCRIPTION: </p>
-                    <p>{recordToAdd.description}</p>
+                    <input style={{ fontWeight: '700' }} value={recordToAdd.description} onChange={(event) => setRecordToAdd({ ...recordToAdd, description: event.target.value })} />
                 </div>
             </div>
 
