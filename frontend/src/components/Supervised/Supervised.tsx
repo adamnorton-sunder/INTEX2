@@ -9,8 +9,13 @@ function Supervised() {
     <section className={styles.gradientBG}>
       <div style={{ paddingTop: "40px" }}>
         <h1>SUPERVISED LEARNING MODEL</h1>
-        <p>Is authenticated: {user?.isAuthenticated.toString()}</p>
       </div>
+
+      <div style={{ display: 'grid', placeItems: 'center' }}>
+        <div className={styles.rect}>
+        </div>
+      </div>
+
       <div
         style={{ display: "grid", placeItems: "center" }}
         className="content-wrap"

@@ -194,6 +194,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
   // Effects
   useEffect(() => {
     getFilteredData();
+    setCurrentPage(1);
   }, [appliedFilters, data]);
 
   useEffect(() => {
@@ -207,8 +208,8 @@ const DataTable: React.FC<DataTableProps> = (props) => {
 
   const navigate = useNavigate();
 
-  const handleEditRecord = (recordToAdd: any) => {
-    navigate('/addBurial', { state: { recordToAdd } })
+  const handleViewDetails = (record: any) => {
+    navigate('/burialDetails', { state: { record } })
   }
 
   return (
@@ -224,7 +225,7 @@ const DataTable: React.FC<DataTableProps> = (props) => {
         <tbody>
           {paginatedData.map((item, rowIndex) => (
             <tr
-              onClick={() => handleEditRecord(item)}
+              onClick={() => handleViewDetails(item)}
               key={`${item.id}-${rowIndex}`}
               className={styles.dataTableRow}
             >

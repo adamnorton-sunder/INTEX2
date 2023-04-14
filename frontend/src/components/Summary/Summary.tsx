@@ -48,8 +48,8 @@ function Summary() {
 
   return (
     <section className="page-container">
-      <div style={{ display: 'grid', gridTemplateColumns: '25% 1fr' }}>
-        <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '50px 20px 180px 20px', textAlign: 'left', height: '100vh', overflowY: 'scroll' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '28% 1fr' }}>
+        <div style={{ backgroundColor: 'rgb(25, 25, 24)', padding: '50px 27px 180px 35px', textAlign: 'left', height: '100vh', overflowY: 'scroll' }}>
           <div style={{ marginBottom: '20px' }}>
             <h3 style={{ letterSpacing: '5px', margin: '0px' }}>FILTERS</h3>
           </div>

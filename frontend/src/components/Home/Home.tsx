@@ -29,6 +29,12 @@ function Home() {
       <div style={{ paddingTop: "40px" }}>
         <h1>THE MUMMIES OF FAG EL-GAMOUS</h1>
       </div>
+
+      <div style={{ display: 'grid', placeItems: 'center' }}>
+        <div className={styles.rect}>
+        </div>
+      </div>
+
       <div
         style={{ display: "grid", placeItems: "center" }}
         className="content-wrap"
@@ -36,6 +42,12 @@ function Home() {
         <div>
           <Carousel />
         </div>
+
+        <div style={{ display: 'grid', placeItems: 'center', margin: '30px' }}>
+          <div className={styles.rect}>
+          </div>
+        </div>
+
         {/* <div className="container">
           <Swiper items={items} />
         </div> */}
@@ -64,9 +76,15 @@ function Home() {
               Click here
             </a>
           </p>
+
           <br></br>
-          <br></br>
-          <br></br>
+
+          <div style={{ display: 'grid', placeItems: 'center', margin: '30px' }}>
+            <div className={styles.rect}>
+            </div>
+          </div>
+
+
           <br></br>
           <p>
             Want to learn more about Fag El-Gamous and the academic findings?
@@ -82,10 +100,6 @@ function Home() {
             </a>
             &nbsp;by R. Paul Evans, David M. Whitchurch, Kerry Muhlestein
           </p>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
         </div>
         <CookieConsent
           location="bottom"

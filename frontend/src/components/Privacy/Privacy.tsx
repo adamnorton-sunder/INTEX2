@@ -3,10 +3,16 @@ import styles from '../Unsupervised/Unsupervised.module.css';
 
 function Privacy() {
   return (
-    <section className={styles.gradientBG}>
+    <section>
       <div style={{ paddingTop: "40px" }}>
         <h1>PRIVACY</h1>
       </div>
+
+      <div style={{ display: 'grid', placeItems: 'center', margin: '30px' }}>
+        <div className={styles.rect}>
+        </div>
+      </div>
+
       <div
         style={{ display: "grid", placeItems: "center" }}
         className="content-wrap"

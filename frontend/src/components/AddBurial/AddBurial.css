@@ -1,5 +1,10 @@
 input {
-    max-width: 175px
+    max-width: 100px;
+    background-color: transparent;
+    border: 2px solid rgb(20, 20, 20);
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 14px;
 }
 
 .optionButton {
