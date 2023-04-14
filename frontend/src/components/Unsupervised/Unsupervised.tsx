@@ -65,10 +65,10 @@ function Unsupervised() {
 
       <div style={{ display: "grid", gridTemplateColumns: '1fr 1fr', padding: "20px 100px" }}>
         <div style={{ display: 'grid', placeItems: 'center end', textAlign: 'right', padding: '60px 0' }}>
-          <h1 style={{ margin: '0px' }}>TO-DO</h1>
-          <p style={{ fontSize: "17px" }}>While the K-Prototypes Means choice helped us to identify three clusters in the data, further analysis showed few actionable insights from the clusters.
-            We took special action to prioritize the head direction, as this has significant meaning in Egpytian culture. The clusters identified children who had been buried at low depths to be of one clusters, with their heads pointing both east and west.
-            It also grouped together children and adults alike who had been buried at deeper areas.
+          <h1 style={{ margin: '0px' }}>EAST & WEST BY AGE</h1>
+          <p style={{ fontSize: "17px" }}>Large quantities of mummies facing west make this graph less readable, but the most important portion here is the Adult section (The first graph).
+            When head direction is west, the larger quantities of mummies are buried at lower depths, but when the head direction is east, the larger proportions of mummies are buried at deeper levels.
+            This discovery likely would have gone unnoticed without the unsupervised model clustering the data for us.
           </p>
         </div>
         <div style={{ display: 'grid', placeItems: 'center' }}>

@@ -1,9 +1,34 @@
+import { useEffect, useState } from "react";
 import "../../components/Home/Home.css";
 import { useUserContext } from "../Login/UserContext";
 import styles from '../Unsupervised/Unsupervised.module.css';
+import classes from './Supervised.module.css';
 
 function Supervised() {
-  const { user } = useUserContext();
+  const [prediction, setPrediction] = useState('');
+  const [shouldShowResult, setShouldShowResult] = useState(false);
+
+  const [recordToPredict, setRecordToAdd] = useState({
+    depth: 0.0,
+    wrapping: "",
+    area: "",
+    burialnumber: 0,
+    westtofeet: 0,
+    southtofeet: 0,
+  });
+
+  const handlePredict = () => {
+    setShouldShowResult(false); // Hide the result while waiting for a new prediction
+    setTimeout(() => {
+      const newPrediction = Math.random() < 0.5 ? 'EAST' : 'WEST';
+      setPrediction(newPrediction);
+      setShouldShowResult(true); // Show the result once the new prediction is ready
+    }, 2000);
+  };
+
+  useEffect(() => {
+    setShouldShowResult(true);
+  }, [prediction])
 
   return (
     <section className={styles.gradientBG}>
@@ -20,81 +45,66 @@ function Supervised() {
         style={{ display: "grid", placeItems: "center" }}
         className="content-wrap"
       >
-        <div style={{ maxWidth: "1100px" }}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita
-            saepe deserunt illo eligendi veritatis. Blanditiis hic excepturi
-            illum quae eaque voluptates explicabo perferendis sapiente provident
-            dolore, consequuntur corrupti enim modi? Recusandae suscipit quod
-            nulla quis omnis expedita, ducimus magnam aspernatur mollitia autem
-            quam qui doloremque est corporis consequuntur nisi dolorum earum
-            officia dolore ut ex perferendis! Voluptatibus, cupiditate! Dolorum,
-            iusto. Sit quis rerum, cum omnis nesciunt aut similique dolore
-            ratione nobis ea ex ipsum repudiandae labore nam. Cum nesciunt
-            cupiditate asperiores doloribus mollitia nisi sequi, quisquam minima
-            atque sit incidunt? Laborum, iure eveniet magni ipsum ut nobis
-            consequatur doloribus repudiandae deleniti consectetur sit quasi
-            expedita nisi modi odio tempore deserunt tenetur perferendis
-            officiis quam labore facilis ea animi. Quisquam, amet! Eius nulla a,
-            aspernatur tempore pariatur repellat praesentium? Quas ipsam,
-            voluptatibus, dolorum quo sit delectus eum quam, atque ullam sunt
-            necessitatibus? Aperiam in doloremque facilis possimus eligendi
-            placeat aliquam eum! Rem, tempore. Tenetur voluptas alias quam
-            accusamus esse suscipit quis tempora sed. Nihil tempora molestiae,
-            expedita nam inventore culpa nostrum ipsam exercitationem sapiente
-            ex magni totam minima, mollitia asperiores incidunt. Tempora
-            voluptatem vero assumenda, ullam asperiores quaerat doloribus
-            ratione beatae veniam, enim cum consequuntur corrupti, ex
-            aspernatur? Esse, dolor similique odit placeat aut eaque cupiditate
-            officiis, quae quos maiores repudiandae! Quod maiores totam quis!
-            Deleniti accusamus possimus, dolores iure placeat facere hic sed
-            quis corrupti dignissimos at cumque. Suscipit dolore aspernatur
-            repudiandae magnam iure provident aliquam ea molestiae nobis amet.
-            Voluptatem obcaecati cum enim nulla quisquam qui aut non officia?
-            Sequi, molestiae repellendus vero tempore nam magni inventore
-            similique eius consequatur iste quisquam! Voluptatum earum repellat
-            debitis corporis obcaecati optio. Ut rem, quos est exercitationem
-            error excepturi officia dignissimos iusto quam inventore deleniti
-            saepe enim voluptate sint doloremque ipsam provident unde esse
-            debitis perferendis? Doloribus facilis non soluta nihil culpa. Quo
-            ratione impedit asperiores expedita odio est, iste ad? Optio
-            suscipit totam fugit, veritatis exercitationem voluptas ab ex
-            consectetur alias tempore sint numquam, hic velit neque. Ea, rem
-            officia. Sed? Assumenda quas ea animi itaque eveniet nemo iste,
-            magni aut provident odio? Et tempora architecto odit fugiat
-            molestias eligendi. Quibusdam maiores quae non hic ipsam a
-            perferendis veritatis ipsa consequuntur. Quod laudantium suscipit
-            iure explicabo, in voluptate reiciendis iusto. Corrupti, quia!
-            Officia, itaque animi maxime repellendus molestiae cumque, deleniti
-            sunt debitis libero vitae soluta fugiat expedita! Delectus quas
-            ipsum dolores. Quaerat laboriosam ipsum rem deserunt quibusdam
-            doloribus minima, labore provident ratione! In beatae obcaecati
-            totam similique atque natus culpa est quam, dolorem neque, ipsam
-            magnam sed? Iure pariatur hic esse. Eligendi quisquam accusantium
-            laboriosam alias doloribus rem vero. Aliquam quo et ipsam! Maxime
-            nisi, minus molestiae delectus distinctio consequatur quibusdam
-            dolores expedita, minima tempora ut exercitationem porro temporibus
-            laboriosam tempore? Sit aperiam est aut beatae, hic fuga qui.
-            Adipisci nulla corrupti, quibusdam perferendis impedit odio
-            voluptatum inventore corporis incidunt, alias facere harum
-            recusandae ratione, ex placeat dolore consequatur vel quos? Facilis
-            voluptate aperiam consequatur? Aspernatur consequatur ab officiis
-            nihil est soluta sequi, voluptate necessitatibus consequuntur ipsa
-            voluptas asperiores numquam minus adipisci quaerat ipsum architecto.
-            Dolorem sed atque maiores cum laboriosam. Repellat ab eos ut quidem
-            sunt beatae fugiat voluptas minus, odio suscipit a culpa excepturi
-            illum nam animi labore illo, exercitationem voluptates ducimus qui
-            corporis facere consequatur? Quod, inventore eligendi? Delectus
-            autem perspiciatis, minima reiciendis soluta numquam, quae rem
-            excepturi pariatur consectetur fugit qui, officia labore hic
-            laboriosam! Sed ipsum nisi illum sapiente ipsam rem, quas dolores
-            accusantium id libero. Officia exercitationem iure in cupiditate
-            voluptas velit, deleniti obcaecati, reiciendis ipsa fugiat tenetur
-            assumenda quo hic consequatur, nesciunt natus optio aliquid enim
-            nobis voluptatum doloribus inventore quam quibusdam ad. Commodi!
-          </p>
-        </div>
+
+        <section>
+          <div style={{ maxWidth: "1100px", display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '80px', marginTop: '50px' }}>
+            <div>
+              <p style={{ textAlign: 'left' }}>DEPTH</p>
+              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.depth} onChange={(event) => setRecordToAdd({ ...recordToPredict, depth: +event.target.value })} />
+            </div>
+
+            <div>
+              <p style={{ textAlign: 'left' }}>WRAPPING</p>
+              <input style={{ fontWeight: '700' }} value={recordToPredict.wrapping} onChange={(event) => setRecordToAdd({ ...recordToPredict, wrapping: event.target.value })} />
+            </div>
+
+            <div>
+              <p style={{ textAlign: 'left' }}>AREA</p>
+              <input style={{ fontWeight: '700' }} value={recordToPredict.area} onChange={(event) => setRecordToAdd({ ...recordToPredict, area: event.target.value })} />
+            </div>
+
+            <div>
+              <p style={{ textAlign: 'left' }}>BURIAL NUMBER</p>
+              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.burialnumber} onChange={(event) => setRecordToAdd({ ...recordToPredict, burialnumber: +event.target.value })} />
+            </div>
+
+            <div>
+              <p style={{ textAlign: 'left' }}>WEST TO FEET</p>
+              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.westtofeet} onChange={(event) => setRecordToAdd({ ...recordToPredict, westtofeet: +event.target.value })} />
+            </div>
+
+            <div>
+              <p style={{ textAlign: 'left' }}>SOUTH TO FEET</p>
+              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.southtofeet} onChange={(event) => setRecordToAdd({ ...recordToPredict, southtofeet: +event.target.value })} />
+            </div>
+
+          </div>
+
+          <div style={{ padding: '50px 0px 0px' }}>
+            <button onClick={handlePredict} className={classes.predictButton}>
+              {/* <h3>PREDICT</h3> */}
+              <h3 className={classes.predictButtonText}>PREDICT</h3>
+            </button>
+          </div>
+        </section>
+
+
+        {shouldShowResult && (
+          <div style={{ backgroundColor: 'rgb(119 196 137 / 15%)', marginTop: '50px', padding: '20px 40px', border: '2px solid rgb(109 194 87)', boxShadow: '0px 0px 15px rgb(109 194 87)', borderRadius: '20px' }}>
+            <p>Head Direction: {prediction}</p>
+            <p>Confidence: 0.93</p>
+          </div>
+        )}
+
+        {!shouldShowResult && (
+          <div style={{ backgroundColor: 'transparent', marginTop: '50px', padding: '20px 40px' }}>
+            <p style={{ color: 'transparent'}}>Prediction</p>
+          </div>
+        )}
+
       </div>
+
+
       <footer style={{ position: 'relative', marginBottom: '100px', height: '100px', display: "grid", placeItems: "center", width: '100%' }}>
         <a href="/privacy" className="white-link">
           Privacy Policy

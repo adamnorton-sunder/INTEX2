@@ -74,9 +74,29 @@ function AddBurial() {
         console.log('POST request response:', response);
     };
 
+    const editRecord = async (recordId: string, updatedData: any) => {
+        const res = await fetch(`https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt/${recordId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData),
+        });
+        const response = await res.json();
+        console.log('PUT request response:', response);
+    };
+
+    const deleteRecord = async (recordId: string) => {
+        const res = await fetch(`https://intexii-group1-4.us-east-1.elasticbeanstalk.com/egypt/${recordId}`, {
+          method: 'DELETE',
+        });
+        const response = await res.json();
+        console.log('DELETE request response:', response);
+    };
+
     const handleSaveRecord = () => {
         if (editMode) {
-            // PUT HTTP
+            editRecord(recordToAdd.id, recordToAdd);
         }
         if (!editMode) {
             addNewRecord(recordToAdd);
@@ -88,7 +108,7 @@ function AddBurial() {
 
     const handleDeleteRecord = () => {
         console.log(recordToAdd);
-        // TO-DO: DELETE HTTP REQUEST
+        deleteRecord(recordToAdd.id);
     };
 
     return (
@@ -211,11 +231,11 @@ function AddBurial() {
             <div style={{ marginTop: '40px' }}>
                 <div>
                     <p>TEXT: </p>
-                    <input style={{ fontWeight: '700' }} value={recordToAdd.text} onChange={(event) => setRecordToAdd({ ...recordToAdd, text: event.target.value })} />
+                    <input style={{ fontWeight: '700', minWidth: '500px' }} value={recordToAdd.text} onChange={(event) => setRecordToAdd({ ...recordToAdd, text: event.target.value })} />
                 </div>
                 <div>
                     <p>TEXTILE DESCRIPTION: </p>
-                    <input style={{ fontWeight: '700' }} value={recordToAdd.description} onChange={(event) => setRecordToAdd({ ...recordToAdd, description: event.target.value })} />
+                    <input style={{ fontWeight: '700', minWidth: '500px' }} value={recordToAdd.description} onChange={(event) => setRecordToAdd({ ...recordToAdd, description: event.target.value })} />
                 </div>
             </div>
 

@@ -1,0 +1,27 @@
+input {
+    border: solid 2px rgba(40, 40, 40, 0.7);
+    padding: 10px;
+    min-width: 200px;
+}
+
+.predictButton {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 40px;
+    background-image: linear-gradient(180deg, #ef9e12, rgb(239, 122, 18));
+
+    transition: 0.3s ease-in-out;
+}
+
+.predictButton:hover {
+    transform: scale(1.02);
+    background-image: linear-gradient(180deg, #f8ad2c, rgb(223, 126, 41));
+    box-shadow: 0px 0px 15px #f8ad2c;
+}
+
+.predictButtonText {
+    letter-spacing: 5px;
+    margin: 0px;
+    font-size: 14px;
+    color: #ffffff;
+}
