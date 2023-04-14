@@ -26,9 +26,9 @@ function Supervised() {
     }, 2000);
   };
 
-  useEffect(() => {
-    setShouldShowResult(true);
-  }, [prediction])
+  // useEffect(() => {
+  //   setShouldShowResult(true);
+  // }, [prediction])
 
   return (
     <section className={styles.gradientBG}>
@@ -50,32 +50,32 @@ function Supervised() {
           <div style={{ maxWidth: "1100px", display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '80px', marginTop: '50px' }}>
             <div>
               <p style={{ textAlign: 'left' }}>DEPTH</p>
-              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.depth} onChange={(event) => setRecordToAdd({ ...recordToPredict, depth: +event.target.value })} />
+              <input className={classes.predictionInput} type="number" style={{ fontWeight: '700' }} value={recordToPredict.depth} onChange={(event) => setRecordToAdd({ ...recordToPredict, depth: +event.target.value })} />
             </div>
 
             <div>
               <p style={{ textAlign: 'left' }}>WRAPPING</p>
-              <input style={{ fontWeight: '700' }} value={recordToPredict.wrapping} onChange={(event) => setRecordToAdd({ ...recordToPredict, wrapping: event.target.value })} />
+              <input className={classes.predictionInput} style={{ fontWeight: '700' }} value={recordToPredict.wrapping} onChange={(event) => setRecordToAdd({ ...recordToPredict, wrapping: event.target.value })} />
             </div>
 
             <div>
               <p style={{ textAlign: 'left' }}>AREA</p>
-              <input style={{ fontWeight: '700' }} value={recordToPredict.area} onChange={(event) => setRecordToAdd({ ...recordToPredict, area: event.target.value })} />
+              <input className={classes.predictionInput} style={{ fontWeight: '700' }} value={recordToPredict.area} onChange={(event) => setRecordToAdd({ ...recordToPredict, area: event.target.value })} />
             </div>
 
             <div>
               <p style={{ textAlign: 'left' }}>BURIAL NUMBER</p>
-              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.burialnumber} onChange={(event) => setRecordToAdd({ ...recordToPredict, burialnumber: +event.target.value })} />
+              <input className={classes.predictionInput} type="number" style={{ fontWeight: '700' }} value={recordToPredict.burialnumber} onChange={(event) => setRecordToAdd({ ...recordToPredict, burialnumber: +event.target.value })} />
             </div>
 
             <div>
               <p style={{ textAlign: 'left' }}>WEST TO FEET</p>
-              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.westtofeet} onChange={(event) => setRecordToAdd({ ...recordToPredict, westtofeet: +event.target.value })} />
+              <input className={classes.predictionInput} type="number" style={{ fontWeight: '700' }} value={recordToPredict.westtofeet} onChange={(event) => setRecordToAdd({ ...recordToPredict, westtofeet: +event.target.value })} />
             </div>
 
             <div>
               <p style={{ textAlign: 'left' }}>SOUTH TO FEET</p>
-              <input type="number" style={{ fontWeight: '700' }} value={recordToPredict.southtofeet} onChange={(event) => setRecordToAdd({ ...recordToPredict, southtofeet: +event.target.value })} />
+              <input className={classes.predictionInput} type="number" style={{ fontWeight: '700' }} value={recordToPredict.southtofeet} onChange={(event) => setRecordToAdd({ ...recordToPredict, southtofeet: +event.target.value })} />
             </div>
 
           </div>
@@ -90,8 +90,8 @@ function Supervised() {
 
 
         {shouldShowResult && (
-          <div style={{ backgroundColor: 'rgb(119 196 137 / 15%)', marginTop: '50px', padding: '20px 40px', border: '2px solid rgb(109 194 87)', boxShadow: '0px 0px 15px rgb(109 194 87)', borderRadius: '20px' }}>
-            <p>Head Direction: {prediction}</p>
+          <div style={{ backgroundColor: 'transparent', marginTop: '50px', padding: '20px 40px', border: '2px solid rgb(109 194 87)', boxShadow: '0px 0px 15px rgb(109 194 87)', borderRadius: '20px' }}>
+            <p style={{ fontWeight: '700', fontSize: '16px' }}>Head Direction: {prediction}</p>
             <p>Confidence: 0.93</p>
           </div>
         )}

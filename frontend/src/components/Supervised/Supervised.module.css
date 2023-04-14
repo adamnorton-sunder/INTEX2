@@ -1,6 +1,6 @@
-input {
-    border: solid 2px rgba(40, 40, 40, 0.7);
-    padding: 10px;
+.predictionInput {
+    border: solid 2px rgba(204, 204, 204, 0.3);
+    padding: 14px;
     min-width: 200px;
 }
 
